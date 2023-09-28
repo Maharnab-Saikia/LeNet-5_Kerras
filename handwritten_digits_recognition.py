@@ -1,33 +1,35 @@
-import os
-import cv2
+import os, cv2
 import numpy as np
-import tensorflow as tf
 import matplotlib.pyplot as plt
+from keras.datasets import mnist
+from keras.layers import Dense, Flatten
+from keras.models import Sequential, load_model
+from keras.utils import normalize
 
 
 if os.path.exists('model'):
-    model = tf.keras.models.load_model('model')
+    model = load_model('model/model.keras')
 else:
-    (X_train, y_train), (X_test, y_test) = tf.keras.datasets.mnist.load_data()
+    (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-    X_train = tf.keras.utils.normalize(X_train, axis=1)
-    X_test = tf.keras.utils.normalize(X_test, axis=1)
+    X_train = normalize(X_train, axis=1)
+    X_test = normalize(X_test, axis=1)
 
-    model = tf.keras.models.Sequential()
-    model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(128, activation='relu'))
-    model.add(tf.keras.layers.Dense(128, activation='relu'))
-    model.add(tf.keras.layers.Dense(10, activation='softmax'))
+    model = Sequential([
+        Flatten(),
+        Dense(128, activation='relu'),
+        Dense(128, activation='relu'),
+        Dense(10, activation='softmax')
+    ])
 
     model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
     model.fit(X_train, y_train, epochs=3)
 
     loss, accuracy = model.evaluate(X_test, y_test)
-    print(loss)
-    print(accuracy)
+    print(f"Loss: {loss}, Accuracy: {accuracy}")
 
-    model.save('model')
+    model.save('model/model.keras')
 
 
 for image in os.listdir('digits/'):
