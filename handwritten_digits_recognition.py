@@ -7,8 +7,8 @@ from keras.models import Sequential, load_model
 from keras.utils import normalize
 
 
-if os.path.exists('model'):
-    model = load_model('model/model.keras')
+if os.path.exists('model.keras'):
+    model = load_model('model.keras')
 else:
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
@@ -29,7 +29,7 @@ else:
     loss, accuracy = model.evaluate(X_test, y_test)
     print(f"Loss: {loss}, Accuracy: {accuracy}")
 
-    model.save('model/model.keras')
+    model.save('model.keras')
 
 
 for image in os.listdir('digits/'):
