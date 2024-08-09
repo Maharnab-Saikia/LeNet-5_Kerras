@@ -1,6 +1,6 @@
 # Handwritten Digits Recognition
 
-This project aims to recognize handwritten digits using machine learning techniques. It utilizes the MNIST dataset and a deep neural network model implemented with TensorFlow and Keras.
+This project aims to recognize handwritten digits using machine learning techniques. It utilizes the MNIST dataset and a deep neural network model implemented with Keras.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -14,8 +14,8 @@ This project aims to recognize handwritten digits using machine learning techniq
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Maharnab-Saikia/HandwrittenDigitsAI.git
-cd HandwrittenDigitsAI
+git clone https://github.com/Maharnab-Saikia/LeNet_Kerras.git
+cd LeNet_Kerras
 ```
 
 2. Install the required dependencies:
