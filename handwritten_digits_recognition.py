@@ -2,8 +2,9 @@ import os, cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.datasets import mnist
-from keras.layers import Dense, Flatten
+from keras.layers import Dense, Flatten, Conv2D, MaxPooling2D, ZeroPadding2D
 from keras.models import Sequential, load_model
+from keras.optimizers import Adam
 from keras.utils import normalize
 
 
@@ -16,15 +17,21 @@ else:
     X_test = normalize(X_test, axis=1)
 
     model = Sequential([
+        ZeroPadding2D(padding=(2, 2), input_shape=(28, 28, 1)),
+        Conv2D(6, (5, 5), activation='sigmoid'),
+        MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
+        Conv2D(16, (5, 5), activation='sigmoid'),
+        MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
+        
         Flatten(),
-        Dense(128, activation='relu'),
-        Dense(128, activation='relu'),
+        Dense(120, activation='sigmoid'),
+        Dense(84, activation='sigmoid'),
         Dense(10, activation='softmax')
     ])
 
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=Adam(learning_rate=0.01), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    model.fit(X_train, y_train, epochs=3)
+    model.fit(X_train, y_train, epochs=11, validation_data=(X_test, y_test))
 
     loss, accuracy = model.evaluate(X_test, y_test)
     print(f"Loss: {loss}, Accuracy: {accuracy}")
