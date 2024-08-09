@@ -1,6 +1,6 @@
 # Handwritten Digits Recognition
 
-This project aims to recognize handwritten digits using machine learning techniques. It utilizes the MNIST dataset and a deep neural network model implemented with Keras.
+This project features my implementation of the original LeNet-5 architecture using Keras. It aims to recognize handwritten digits from the MNIST dataset, demonstrating how classic neural networks can still effectively tackle image classification tasks.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -14,8 +14,8 @@ This project aims to recognize handwritten digits using machine learning techniq
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Maharnab-Saikia/LeNet_Kerras.git
-cd LeNet_Kerras
+git clone https://github.com/Maharnab-Saikia/LeNet-5_Kerras.git
+cd LeNet-5_Kerras
 ```
 
 2. Install the required dependencies:
